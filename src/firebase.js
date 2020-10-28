@@ -15,5 +15,19 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
+const auth = firebase.auth()
+const db = firebase.firestore()
 
-export default firebase
+// collection references
+const usersCollection = db.collection('users')
+const movieListCollection = db.collection('movielists')
+const moviesCollection  = db.collection('movies')
+ 
+
+export default {
+  auth,
+  db,
+  usersCollection,
+  movieListCollection,
+  moviesCollection
+}
