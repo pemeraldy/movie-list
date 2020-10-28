@@ -1,10 +1,12 @@
 <template>
   <div class="container">
+    <h1 class="text-white">Log In</h1>
     <form @submit.prevent="login">
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input
           type="email"
+          v-model="email"
           class="form-control"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
@@ -17,6 +19,7 @@
         <label for="exampleInputPassword1">Password</label>
         <input
           type="password"
+          v-model="password"
           class="form-control"
           id="exampleInputPassword1"
         />
@@ -31,7 +34,7 @@
 </template>
 
 <script>
-import firebase from "@firebase/app";
+import firebase from "../firebase";
 import "@firebase/auth";
 export default {
   data() {
@@ -45,10 +48,14 @@ export default {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
+        .then((data) => {
+          console.log(data);
+          this.$router.push("/");
+        })
         .catch(function(error) {
           // Handle Errors here.
           // var errorCode = error.code;
-          var errorMessage = error.message;
+          const errorMessage = error.message;
           alert(errorMessage);
           // ...
         });
